@@ -1,0 +1,18 @@
+version: "3"
+services:
+  consul:
+    image: consul
+    command: consul agent -server -bootstrap -data-dir /consul/data -client 0.0.0.0
+
+  # Control
+  jmeter-ctl:
+    image: jmeter-ctl
+    environment:
+      - "WAIT_FOR=10"
+    volumes:
+      - ./distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx
+      - ./abc:/results
+
+  # Slaves
+  jmeter:
+    image: jmeter-slave
