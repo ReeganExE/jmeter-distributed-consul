@@ -2,13 +2,18 @@
 
 sleep $WAIT_FOR
 
-remote=$(curl -s $CONSUL_ADDR/v1/catalog/service/jmeter | jq -r '. | map(.Address) | join(",")')
+REMOTES=$(curl -s $CONSUL_ADDR/v1/catalog/service/jmeter | jq -r '. | map(.Address) | join(",")')
 
 # Wait for at least a remote to be availabe
-while [[ -z "$remote" ]]; do
+while [[ -z "$REMOTES" ]]; do
     echo "Waiting for more remote runner ..."
     sleep 1
-    remote=$(curl -s $CONSUL_ADDR/v1/catalog/service/jmeter | jq -r '. | map(.Address) | join(",")')
+    REMOTES=$(curl -s $CONSUL_ADDR/v1/catalog/service/jmeter | jq -r '. | map(.Address) | join(",")')
 done
 
-jmeter -n -t "distributed_testing_sample1.jmx" -l "results/result.csv" -Jserver.rmi.ssl.disable=true -R $remote
+echo $REMOTES
+if [ "$1" = 'jmeter' ]; then
+    set -- "$@" -R "$REMOTES"
+fi
+
+exec "$@"
