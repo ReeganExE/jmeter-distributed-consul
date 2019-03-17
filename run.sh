@@ -20,8 +20,8 @@ done
 sleep 1
 
 docker run --rm --network $network \
-  -v $PWD/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx \
-  -v $PWD/abc:/results \
+  -v $PWD/test/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx \
+  -v $PWD/results:/results \
   jmeter-ctl
 
 echo "Tearing down..."
