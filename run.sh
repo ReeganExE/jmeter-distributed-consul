@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+jmx=${1:-"$PWD/test/distributed_testing_sample1.jmx"}
+output=${2:-"$PWD/results"}
+
 network=jmeter-cluster
 slave=3
 
@@ -13,16 +16,16 @@ sleep 1
 containers=()
 for i in $(seq 1 $slave); do
   echo "Starting slave $i"
-  id=$(docker run --network $network -d jmeter-slave)
+  id=$(docker run --network $network -d reeganexe/jmeter-slave)
   containers+=("$id")
 done
 
 sleep 1
 
 docker run --rm --network $network \
-  -v $PWD/test/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx \
-  -v $PWD/results:/results \
-  jmeter-ctl
+  -v $jmx:/distributed_testing_sample1.jmx \
+  -v $output:/results \
+  reeganexe/jmeter-ctl
 
 echo "Tearing down..."
 for i in ${containers[@]}; do

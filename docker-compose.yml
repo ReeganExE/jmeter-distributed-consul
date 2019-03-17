@@ -6,13 +6,13 @@ services:
 
   # Control
   jmeter-ctl:
-    image: jmeter-ctl
+    image: reeganexe/jmeter-ctl
     environment:
       - "WAIT_FOR=10"
     volumes:
-      - ./distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx
-      - ./abc:/results
+      - ./test/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx
+      - ./results:/results
 
   # Slaves
   jmeter:
-    image: jmeter-slave
+    image: reeganexe/jmeter-slave
