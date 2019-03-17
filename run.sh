@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 network=jmeter-cluster
-slave=2
+slave=3
 
 docker network rm $network
 docker network create $network
@@ -17,7 +17,7 @@ for i in $(seq 1 $slave); do
   containers+=("$id")
 done
 
-sleep 4
+sleep 1
 
 docker run --rm --network $network \
   -v $PWD/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx \
