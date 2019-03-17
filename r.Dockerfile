@@ -7,11 +7,8 @@ RUN \
   rm -rf /var/cache/apk/*
 
 WORKDIR /working
+ENV PATH $PATH:/working
 
-RUN mkdir consul.d
+COPY entrypoint.sh consul.json ./
 
-COPY entrypoint.sh /
-COPY consul.json ./consul.d/
-
-
-CMD ["/entrypoint.sh"]
+CMD ["entrypoint.sh"]

@@ -12,6 +12,5 @@ RUN wget -qO- http://mirror.downloadvn.com/apache//jmeter/binaries/apache-jmeter
   ln -s /opt/rmi_keystore.jks ${JMETER_BIN}/rmi_keystore.jks;
 
 RUN touch /opt/rmi_keystore.jks
-# VOLUME ["/opt/rmi_keystore.jks"]
 
 ENV PATH $PATH:$JMETER_BIN
