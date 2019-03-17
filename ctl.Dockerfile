@@ -1,12 +1,12 @@
-FROM jmeter
+FROM reeganexe/jmeter
 
 ENV WAIT_FOR=${WAIT_FOR:-3}
 
-RUN apk add curl jq; \
+RUN apk update && apk add curl jq && \
   rm -rf /var/cache/apk/*
 
 COPY control.sh /
 
-VOLUME [ "/results" ]
+VOLUME ["/results"]
 
 CMD ["/control.sh"]
