@@ -10,7 +10,7 @@ services:
     environment:
       - "WAIT_FOR=10"
     volumes:
-      - ./test/distributed_testing_sample1.jmx:/distributed_testing_sample1.jmx
+      - ./test/testplan.jmx:/testplan.jmx
       - ./results:/results
 
   # Slaves

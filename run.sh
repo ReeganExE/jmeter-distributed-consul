@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-jmx=${1:-"$PWD/test/distributed_testing_sample1.jmx"}
+jmx=${1:-"$PWD/test/testplan.jmx"}
 output=${2:-"$PWD/results"}
 
-network=jmeter-cluster
 slave=3
+network=jmeter-cluster
 
 docker network rm $network
 docker network create $network
@@ -23,7 +23,7 @@ done
 sleep 1
 
 docker run --rm --network $network \
-  -v $jmx:/distributed_testing_sample1.jmx \
+  -v $jmx:/testplan.jmx \
   -v $output:/results \
   reeganexe/jmeter-ctl
 

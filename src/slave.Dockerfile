@@ -9,7 +9,7 @@ RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL
   rm -rf /var/cache/apk/*
 
 WORKDIR /working
-COPY slave.sh consul.json ./
+COPY src/slave.sh src/consul.json ./
 
 ENV PATH $PATH:/working
 ENTRYPOINT ["slave.sh"]
