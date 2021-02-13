@@ -17,3 +17,5 @@ But you might concern these questions:
 - How to pass test data (user data) to each slave?
 
 By using along with an orchestration tool like Docker Swarm, Rancher, K8s, ... You could easily solve above questions.
+
+In this example, we're using [HashiCorp Consul](https://www.consul.io/) as a service discovery.
